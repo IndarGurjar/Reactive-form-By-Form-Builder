@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl,FormGroup,Validator, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -7,18 +7,20 @@ import { FormControl,FormGroup,Validator, Validators } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'reactive_form';
-  loginForm = new FormGroup({
-    user:new FormControl('',[Validators.required, Validators.minLength(6), Validators.maxLength(15), Validators.pattern('[a-z A-Z ') ]),
-    password:new FormControl('',[Validators.required,Validators.minLength(6), Validators.pattern('[a-z A-Z !@#$%^&*]+$')])
-  })
-  loginUser(){
-    console.log(this.loginForm.value) 
+loginForm: FormGroup;
+  constructor(private fb: FormBuilder) {
+    this.loginForm = fb.group({
+      user: ['',(Validators.required,Validators.minLength(6),Validators.pattern('[a-z A-Z ]+$'))],
+      password: ['',(Validators.required,Validators.minLength(6),Validators.maxLength(15),Validators.pattern('[a-z A-Z 0-9 !@#$%^&*]+$'))]
+    });
+}
+  loginUser() {
+    console.log(this.loginForm.value)
   }
-  get user(){
+  get user() {
     return this.loginForm.get('user')
-  } 
-  get password(){
+  }
+  get password() {
     return this.loginForm.get('password')
   }
 }
