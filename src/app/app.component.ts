@@ -1,25 +1,48 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+
 })
 export class AppComponent {
-loginForm: FormGroup;
+  title = 'app';
+  users = {
+    name: "",
+    password: "",
+    confirm_password: "",
+    Number: '',
+    email: ""
+  }
+  loginForm: FormGroup;
   constructor(private fb: FormBuilder) {
     this.loginForm = fb.group({
-      user: ['',(Validators.required,Validators.pattern('[a-z A-Z ]{6,}$'))],
-      password: ['',(Validators.required,Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/))]
+      name: ['', Validators.required],
+      password: ['', [Validators.required, Validators.pattern('((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,30})')]],
+      confirm_password: ['', [Validators.required, Validators.pattern('((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,30})')]],
+      Number: ['', [Validators.required, Validators.pattern('[0-9]{10}')]],
+      email: ['', [Validators.required, Validators.email]],
     });
-}
-  loginUser() {
-    console.log(this.loginForm.value)
   }
-  get user() {
-    return this.loginForm.get('user')
+  // password: ['', [Validators.required, Validators.minLength(6)]]
+  loginUser() {
+    console.log(this.loginForm.value);
+  }
+  get name() {
+    return this.loginForm.get('name')
   }
   get password() {
     return this.loginForm.get('password')
+  }
+  get confirm_password() {
+    return this.loginForm.get('confirm_password')
+  }
+  get Number() {
+    return this.loginForm.get('Number')
+  }
+  get email() {
+    return this.loginForm.get('email')
   }
 }

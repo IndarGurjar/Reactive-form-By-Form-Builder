@@ -1,10 +1,20 @@
-<h1>Reactive Form </h1>
+<h1>Reactive form By Form-Builder </h1>
 <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
-  <input type="text" placeholder="enter your name" formControlName="user"> <br>
-  <span style="color: red;" *ngIf="user && user.invalid && user.touched">This Field is Not Valid</span>
-  <br>
-  <input type="text" placeholder="enter your password" formControlName="password"> <br>
-  <span style="color: red;" *ngIf="password && password.invalid && password.touched">This Field is Not Valid</span>
-  <br>
-  <button [disabled]="loginForm.invalid" >Login</button>
+  <input type="text" placeholder="enter your name " formControlName="name" name="name"> <br>
+  <span style="color: red;" *ngIf="name && name.invalid && name.touched">This Field is Not Valid</span> <br>
+
+  <input type="password" placeholder="enter your password" formControlName="password"> <br>
+  <span style="color: red;" *ngIf="password && password.invalid && password.touched">This Field is Not Valid</span> <br>
+
+  <input type="Password" placeholder="enter your password again" formControlName="confirm_password"> <br>
+  <span style="color: red;" *ngIf="confirm_password && confirm_password.invalid && confirm_password.touched">This Field is Not Valid</span> <br>
+
+  <input type="Number" placeholder="enter your mobile  number " formControlName="Number"> <br>
+  <span style="color: red;" *ngIf="Number && Number.invalid && Number.touched">This Field is Not Valid</span> <br>
+
+  <input type="email" placeholder="enter your  email " formControlName="email"> <br>
+  <span style="color: red;" *ngIf="email && email.invalid && email.touched">This Field is Not Valid</span> <br>
+   
+  <button [disabled]="loginForm.invalid">login</button>
+
 </form>
